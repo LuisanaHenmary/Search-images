@@ -17,6 +17,27 @@ const Header = styled.header`
         border-radius: 4px;
     }
 
+    & label{
+        color: white;
+        font-size: 30px;
+        margin-right: 5px; 
+    }
+
+    & button{
+        color white;
+        background-color:rgba(0, 0, 0,0.5);
+        border:none;
+        padding: 10px 5px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    & button:hover{
+        color white;
+        background-color:rgba(0, 0, 0,0.3);
+    }
+
+
     & h1{
         color: white;
     }
