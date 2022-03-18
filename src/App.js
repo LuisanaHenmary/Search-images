@@ -1,44 +1,41 @@
-import { useCallback, useEffect, useState } from "react"
 import axios from "axios"
+import { useState } from "react"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import Content from "./components/Content"
 import Picture from "./components/Picture"
+import Form from "./components/Form"
+import Home from "./components/Home"
 
 const App = () => {
-
-  const [photos, setSPhotos] = useState([])
   const apiKey = process.env.REACT_APP_API_KEY
-  const search = "cat"
+  const [photos, setPhotos] = useState([])
 
-  const cargaSimbolos = useCallback(async () => {
+  const submitSearch = async form => {
     try {
       const responce = await axios.get(
-        `https://api.unsplash.com/search/photos?per_page=20&query=${search}█`,
+        `https://api.unsplash.com/search/photos?per_page=20&query=${form.search}█`,
         {
           headers: {
             'Authorization': `Client-ID ${apiKey}`
           }
         })
-        setSPhotos(responce.data.results)
+      setPhotos(responce.data.results)
     } catch (error) {
       console.log('error')
     }
-  }, [search, apiKey])
-
-
-  useEffect(() => {
-    cargaSimbolos()
-  }, [cargaSimbolos])
+  }
 
   return (
     <>
       <Header>
         <h1>🖼️ Search images 📸 </h1>
+        <Form submit={submitSearch} />
       </Header>
-      <Content>
-        {photos.map(photo => <Picture key={photo.id} photo={photo} />)}
-      </Content>
+      {photos.length !== 0 ?
+        <Content>
+          {photos.map(photo => <Picture key={photo.id} photo={photo} />)}
+        </Content> : <Home />}
       <Footer>
         <p>developer: Luisana Henmary Perez Cadenas</p>
         <p>Pictures from unsplash.com</p>
