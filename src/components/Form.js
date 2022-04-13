@@ -6,7 +6,11 @@ const Form = ({ submit }) => {
         search: "",
     }
 
-    const [form, handleChange, reset] = useForm(initial_values)
+    const [
+        form,
+        handleChange,
+        reset
+    ] = useForm(initial_values)
 
     const handleSumit = (e) => {
         e.preventDefault()
@@ -17,14 +21,22 @@ const Form = ({ submit }) => {
 
     return (
         <form onSubmit={handleSumit} >
-            <label>Search:</label>
+            <label>
+                Search:
+            </label>
+
             <input
                 type="text"
                 name="search"
                 onChange={handleChange}
                 value={form.search}
             />
-            <button type="submit" >Enviar</button>
+
+            <button
+                type="submit"
+            >
+                Enviar
+            </button>
         </form>
     )
 }

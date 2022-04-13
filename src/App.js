@@ -9,17 +9,19 @@ import Home from "./components/Home"
 
 const App = () => {
   const apiKey = process.env.REACT_APP_API_KEY
+  const url = process.env.REACT_APP_URL
   const [photos, setPhotos] = useState([])
 
   const submitSearch = async form => {
     try {
       const responce = await axios.get(
-        `https://api.unsplash.com/search/photos?per_page=20&query=${form.search}█`,
+        `${url}?per_page=20&query=${form.search}█`,
         {
           headers: {
             'Authorization': `Client-ID ${apiKey}`
           }
-        })
+        }
+      )
       setPhotos(responce.data.results)
     } catch (error) {
       console.log('error')
@@ -29,17 +31,35 @@ const App = () => {
   return (
     <>
       <Header>
-        <h1>🖼️ Search images 📸 </h1>
+        <h1>
+          🖼️ Search images 📸
+        </h1>
         <Form submit={submitSearch} />
+
       </Header>
-      {photos.length !== 0 ?
-        <Content>
-          {photos.map(photo => <Picture key={photo.id} photo={photo} />)}
-        </Content> : <Home />}
+
+      {
+        photos.length !== 0 ?
+          <Content>
+            {photos.map(photo =>
+              <Picture
+                key={photo.id}
+                photo={photo}
+              />)
+            }
+          </Content> : <Home />
+      }
+
       <Footer>
-        <p>developer: Luisana Henmary Perez Cadenas</p>
-        <p>Pictures from unsplash.com</p>
-        <p>deploy march 2022</p>
+        <p>
+          Developer: Luisana Henmary Perez Cadenas
+        </p>
+        <p>
+          Affiliations: Kunaisoft,
+          <a href="https://api.unsplash.com">
+            Unsplash
+          </a>
+        </p>
       </Footer>
     </>
   );

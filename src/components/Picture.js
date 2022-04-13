@@ -26,8 +26,18 @@ const Article = styled.article`
 const Picture = ({ photo }) => {
     return (
         <Article>
-            <img src={photo.urls.regular} alt={photo.alt_description} />
-            <p>{[photo.description, photo.alt_description].join(' - ')} </p>
+            <img
+                src={photo.urls.regular}
+                alt={photo.alt_description}
+            />
+            <p>
+                {
+                    [
+                        photo.description,
+                        photo.alt_description
+                    ].join(' - ')
+                }
+            </p>
         </Article>
     )
 }
